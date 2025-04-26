@@ -17,4 +17,4 @@ A Tampermonkey/Violentmonkey userscript that sets default volume for videos on T
 
 MIT License
 
-© 2025 by Lin_tsen
+© 2025 Lin_tsen
