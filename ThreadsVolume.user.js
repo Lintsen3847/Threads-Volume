@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
         volumeDiv.style.zIndex = '9999';
         volumeDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
         volumeDiv.style.maxHeight = '3vh';
-        volumeDiv.style.color = 'white'; // 整個數字白色，不額外背景
+        volumeDiv.style.color = 'white'; // 數字白色，無背景
 
         const volumeTextContainer = document.createElement('div');
         volumeTextContainer.style.overflow = 'hidden';
@@ -60,16 +60,16 @@ window.addEventListener('load', () => {
         volumeSelectorInput.type = 'range';
         volumeSelectorInput.value = localStorage.getItem('defaultVolume') * 100 || 20;
         volumeSelectorInput.min = 0;
-        volumeSelectorInput.max = 100; // 更新最大值為 100
+        volumeSelectorInput.max = 100;
         volumeSelectorInput.step = 1; // 只顯示整數
         volumeSelectorInput.style.display = 'none';
         volumeSelectorInput.style.cursor = 'ew-resize';
         volumeSelectorInput.style.width = '100px'; // 滑桿寬度
 
         volumeSelectorInput.addEventListener('input', () => {
-            let volumeValue = Math.round(volumeSelectorInput.value); // 只取整數
+            let volumeValue = Math.round(volumeSelectorInput.value); // 取整數
             volumeSelectorText.textContent = volumeValue;
-            localStorage.setItem('defaultVolume', volumeValue / 100); // 更新到 localStorage
+            localStorage.setItem('defaultVolume', volumeValue / 100);
         });
 
         // hover 效果
@@ -82,13 +82,11 @@ window.addEventListener('load', () => {
             volumeText.style.color = '';
         });
 
-        // 點擊切換
         let showVolumeSlider = false;
         volumeDiv.addEventListener('click', (event) => {
             event.stopPropagation();
             showVolumeSlider = !showVolumeSlider;
             volumeSelectorInput.style.display = showVolumeSlider ? 'block' : 'none';
-            // 拖拉時數字會一直顯示，不切換
         });
 
         volumeSelectorContainer.appendChild(volumeSelectorText);
