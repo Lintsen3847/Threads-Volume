@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Threads-Volume
 // @namespace    threadsVolume
-// @version      1.0.0
+// @version      1.1.0
 // @description  Set your Threads videos default volumes
 // @author       Lin_tsen
 // @match        *://*.threads.com/*
@@ -10,7 +10,7 @@
 // @license      MIT
 // ==/UserScript==
 
-console.log("threadsVolumeCustomize")
+console.log("threadsVolumeCustomize");
 
 window.addEventListener('load', () => {
     if (!localStorage.getItem('defaultVolume')) {
@@ -24,31 +24,18 @@ window.addEventListener('load', () => {
         const volumeDiv = document.createElement('div');
         volumeDiv.id = 'volumeDiv';
         volumeDiv.style.display = 'flex';
-        volumeDiv.style.padding = '10px';
+        volumeDiv.style.alignItems = 'center';
+        volumeDiv.style.justifyContent = 'space-between';
+        volumeDiv.style.padding = '8px 12px';
         volumeDiv.style.borderRadius = '8px';
         volumeDiv.style.cursor = 'pointer';
-        volumeDiv.style.maxHeight = '3vh';
         volumeDiv.style.position = 'fixed';
         volumeDiv.style.top = '10px';
         volumeDiv.style.right = '10px';
         volumeDiv.style.zIndex = '9999';
         volumeDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
-
-        volumeDiv.addEventListener('mouseenter', () => {
-            volumeDiv.style.backgroundColor = '#1A1A1A';
-            volumeText.style.color = 'white'
-        });
-
-        volumeDiv.addEventListener('mouseleave', () => {
-            volumeDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            volumeText.style.color = ''
-        });
-
-        const volumeBtn = document.createElement('button');
-        volumeBtn.id = 'volumeBtn';
-        volumeBtn.style.display = 'flex';
-        volumeBtn.style.textAlign = 'left';
-        volumeBtn.style.cursor = 'pointer';
+        volumeDiv.style.maxHeight = '3vh';
+        volumeDiv.style.color = 'white'; // 整個數字白色，不額外背景
 
         const volumeTextContainer = document.createElement('div');
         volumeTextContainer.style.overflow = 'hidden';
@@ -58,39 +45,58 @@ window.addEventListener('load', () => {
         volumeText.style.paddingLeft = '10px';
         volumeText.textContent = 'Volume';
 
+        const volumeSelectorContainer = document.createElement('div');
+        volumeSelectorContainer.style.display = 'flex';
+        volumeSelectorContainer.style.alignItems = 'center';
+
+        const volumeSelectorText = document.createElement('span');
+        volumeSelectorText.textContent = Math.round(localStorage.getItem('defaultVolume') * 100 || 20); // 顯示整數
+        volumeSelectorText.style.marginLeft = '10px';
+        volumeSelectorText.style.fontSize = '14px';
+        volumeSelectorText.style.minWidth = '30px'; // 保持寬度一致
+        volumeSelectorText.style.textAlign = 'center';
+
         const volumeSelectorInput = document.createElement('input');
         volumeSelectorInput.type = 'range';
         volumeSelectorInput.value = localStorage.getItem('defaultVolume') * 100 || 20;
         volumeSelectorInput.min = 0;
-        volumeSelectorInput.max = 99.9;
+        volumeSelectorInput.max = 100; // 更新最大值為 100
+        volumeSelectorInput.step = 1; // 只顯示整數
         volumeSelectorInput.style.display = 'none';
         volumeSelectorInput.style.cursor = 'ew-resize';
-
-        const volumeSelectorText = document.createElement('span');
-        volumeSelectorText.textContent = volumeSelectorInput.value;
+        volumeSelectorInput.style.width = '100px'; // 滑桿寬度
 
         volumeSelectorInput.addEventListener('input', () => {
-            let volumeValue = volumeSelectorInput.value;
-            if (volumeValue < 10) {
-                volumeValue = '0' + volumeValue;
-            }
+            let volumeValue = Math.round(volumeSelectorInput.value); // 只取整數
             volumeSelectorText.textContent = volumeValue;
-            localStorage.setItem('defaultVolume', volumeValue / 100);
+            localStorage.setItem('defaultVolume', volumeValue / 100); // 更新到 localStorage
         });
 
-        volumeDiv.appendChild(volumeBtn);
-        volumeDiv.appendChild(volumeTextContainer);
-        volumeTextContainer.appendChild(volumeText);
-        volumeBtn.appendChild(volumeSelectorText);
-        volumeBtn.appendChild(volumeSelectorInput);
+        // hover 效果
+        volumeDiv.addEventListener('mouseenter', () => {
+            volumeDiv.style.backgroundColor = '#1A1A1A';
+            volumeText.style.color = 'white';
+        });
+        volumeDiv.addEventListener('mouseleave', () => {
+            volumeDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            volumeText.style.color = '';
+        });
 
-        let showVolumeText = true;
+        // 點擊切換
+        let showVolumeSlider = false;
         volumeDiv.addEventListener('click', (event) => {
             event.stopPropagation();
-            showVolumeText = !showVolumeText;
-            volumeSelectorInput.style.display = showVolumeText ? 'none' : 'block';
-            volumeText.style.display = showVolumeText ? 'block' : 'none';
+            showVolumeSlider = !showVolumeSlider;
+            volumeSelectorInput.style.display = showVolumeSlider ? 'block' : 'none';
+            // 拖拉時數字會一直顯示，不切換
         });
+
+        volumeSelectorContainer.appendChild(volumeSelectorText);
+        volumeSelectorContainer.appendChild(volumeSelectorInput);
+
+        volumeDiv.appendChild(volumeTextContainer);
+        volumeDiv.appendChild(volumeSelectorContainer);
+        volumeTextContainer.appendChild(volumeText);
 
         targetElement.appendChild(volumeDiv);
     };
@@ -117,9 +123,8 @@ window.addEventListener('load', () => {
 
 });
 
-
-// / \----------------, 
-// \_,|               | 
-//     |    Lin_tsen   | 
+// / \----------------,
+// \_,|               |
+//     |    Lin_tsen   |
 //     |  ,--------------
-//     \_/_____________/ 
+//     \_/_____________/
