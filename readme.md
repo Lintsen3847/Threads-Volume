@@ -5,7 +5,7 @@ A Tampermonkey/Violentmonkey userscript that sets default volume for videos on T
 ## Installation
 
 1. Install [Violentmonkey](https://violentmonkey.github.io/) or [Tampermonkey](https://www.tampermonkey.net/).
-2. Click [here](https://raw.githubusercontent.com/Lintsen3847/Threads-Volume/main/main.js) to install the script.
+2. Click [here](https://raw.githubusercontent.com/Lintsen3847/Threads-Volume/main/ThreadsVolume.user.js) to install the script.
 
 ## Features
 
