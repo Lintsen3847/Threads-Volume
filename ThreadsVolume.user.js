@@ -123,8 +123,5 @@ window.addEventListener('load', () => {
 
 });
 
-// / \----------------,
-// \_,|               |
-//     |    Lin_tsen   |
-//     |  ,--------------
-//     \_/_____________/
+
+//"I never sleep today, I sleep tomorrow"
