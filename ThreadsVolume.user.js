@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Threads-Volume
 // @namespace    threadsVolume
-// @version      1.2.0
+// @version      1.3.0
 // @description  Set your Threads videos default volumes
 // @description:zh-TW 設定 Threads 影片的預設音量
 // @description:zh-CN 设定 Threads 影片的预设音量
