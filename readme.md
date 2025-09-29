@@ -1,20 +1,18 @@
 https://greasyfork.org/zh-TW/scripts/534078-threads-volume
 
-# Threads Default Volume
+# Threads 音量控制
 
 A Tampermonkey/Violentmonkey userscript that sets default volume for videos on Threads.net.
 
-## Installation
+## 安裝
 
-1. Install [Violentmonkey](https://violentmonkey.github.io/) or [Tampermonkey](https://www.tampermonkey.net/).
-2. Click [here](https://raw.githubusercontent.com/Lintsen3847/Threads-Volume/main/ThreadsVolume.user.js) to install the script.
+1. 安裝 [Violentmonkey](https://violentmonkey.github.io/) or [Tampermonkey](https://www.tampermonkey.net/).
+2. 點擊 [here](https://raw.githubusercontent.com/Lintsen3847/Threads-Volume/main/ThreadsVolume.user.js) to install the script.
 
-## Features
+## 功能
 
-- Set a default video volume for all videos on Threads.
-- Customizable volume setting.
-- Auto apply on newly loaded videos.
-
+- 調整所有影片音量
+- 
 ## License
 
 MIT License
