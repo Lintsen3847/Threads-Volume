@@ -10,7 +10,7 @@ https://greasyfork.org/zh-TW/scripts/534078-threads-volume
 ## 功能
 
 - 調整所有影片音量
-- 
+
 ## License
 
 MIT License
